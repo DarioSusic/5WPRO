@@ -1,0 +1,25 @@
+{
+  "name": "5wpro.com",
+  "version": "1.0.0",
+  "description": "5WPro.com website ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarioSusic/5WPRO.git"
+  },
+  "keywords": [
+    "webshop"
+  ],
+  "author": "Dario Susic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DarioSusic/5WPRO/issues"
+  },
+  "homepage": "https://github.com/DarioSusic/5WPRO#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
