@@ -1,11 +1,13 @@
+node_modules/
+
 # dependencies
-node_modules
+server/node_modules
 client/node_modules
 /.pnp
 .pnp.js
 
 # privacy config
-config/default.json
+server/config/default.json
 
 # testing
 /coverage
