@@ -52,3 +52,6 @@ Sales – Payments – Administration
 •	Ability to pick up from store (as delivery method)
 •	Ability to send mail with the order to customer and user
 •	Ability to pay by credit card with an automatic e-payment interface and communication with the respective bank payment systems. (Optional)
+
+USE EVENT SOURCING for transactions
+
