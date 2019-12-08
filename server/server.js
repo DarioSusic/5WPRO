@@ -15,5 +15,6 @@ const PORT = process.env.PORT || 4000;
 app.use('/', express.static('../client/build'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/login', require('./routes/api/login'));
+app.use('/api/products', require('./routes/api/products'));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
