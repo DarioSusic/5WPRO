@@ -23,9 +23,38 @@ const ProductSchema = new mongoose.Schema(
       required: [true, 'Please Enter quantity of product']
     },
     pricing: {
-      type: Number,
-      required: [true, 'Please Enter your product price']
+      price: {
+        type: Number,
+        required: [true, 'Please Enter your product price']
+      },
+      discount: {
+        type: Number,
+        default: 0
+      }
     },
+    manufacture_details: {
+      bar_code: {
+        type: String
+      },
+      release_date: {
+        type: Date
+      }
+    },
+    shipping_details: {
+      weight: {
+        type: Number
+      },
+      width: {
+        type: Number
+      },
+      height: {
+        type: Number
+      },
+      depth: {
+        type: Number
+      }
+    },
+    categories: [String],
     date: {
       type: Date,
       default: Date.now
