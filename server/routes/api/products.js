@@ -66,6 +66,7 @@ router.post(
     try {
       const user = await User.findById(req.user.id).select('-password');
 
+      //TODO Check if user is admin
       console.log(user);
       const newProduct = new Product({
         title: req.body.title,
@@ -87,5 +88,27 @@ router.post(
     }
   }
 );
+
+//@route    DELETE api/product/:id
+//@desc     Delete product by id
+//@access   private
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const product = await Post.findById(req.params.id),
+
+    if (!product) {
+      return res.status(404).json({ msg: 'Product does not exist' });
+    }
+
+    //TODO check if user is admin
+    await product.remove();
+
+    res.status(200).json({ msg: 'Product removed' });
+
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).json({ msg: 'Server Error' });
+  }
+});
 
 module.exports = router;
