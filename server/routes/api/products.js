@@ -38,6 +38,9 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//@route    POST api/product
+//@desc     Create new product
+//@access   private
 router.post(
   '/',
   [
@@ -63,11 +66,13 @@ router.post(
     try {
       const user = await User.findById(req.user.id).select('-password');
 
+      console.log(user);
       const newProduct = new Product({
         title: req.body.title,
         description: req.body.description,
         quantity: req.body.quantity,
         price: req.body.price,
+        sku: req.body.sku,
         name: user.name,
         avatar: user.avatar,
         user: req.user.id

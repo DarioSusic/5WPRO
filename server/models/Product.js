@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const ProductSchema = new mongoose.Schema(
   {
     sku: {
-      type: Number,
-      required: true
+      type: String,
+      required: [true, 'Please Enter your SKU']
     },
     title: {
       type: String,
@@ -22,6 +22,11 @@ const ProductSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Please Enter quantity of product']
     },
+    price: {
+      type: Number
+    },
+    //FIXME Figure how to access pricing.price
+    /*
     pricing: {
       price: {
         type: Number,
@@ -31,7 +36,7 @@ const ProductSchema = new mongoose.Schema(
         type: Number,
         default: 0
       }
-    },
+    },*/
     manufacture_details: {
       bar_code: {
         type: String
