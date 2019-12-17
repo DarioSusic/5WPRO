@@ -22,11 +22,6 @@ const ProductSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Please Enter quantity of product']
     },
-    price: {
-      type: Number
-    },
-    //FIXME Figure how to access pricing.price
-    /*
     pricing: {
       price: {
         type: Number,
@@ -36,7 +31,7 @@ const ProductSchema = new mongoose.Schema(
         type: Number,
         default: 0
       }
-    },*/
+    },
     manufacture_details: {
       bar_code: {
         type: String

@@ -68,11 +68,13 @@ router.post(
 
       //TODO Check if user is admin
       console.log(user);
+
+      //TODO add other fields from product schema
       const newProduct = new Product({
         title: req.body.title,
         description: req.body.description,
         quantity: req.body.quantity,
-        price: req.body.price,
+        pricing: { price: req.body.price },
         sku: req.body.sku,
         name: user.name,
         avatar: user.avatar,
@@ -94,7 +96,7 @@ router.post(
 //@access   private
 router.delete('/:id', auth, async (req, res) => {
   try {
-    const product = await Post.findById(req.params.id),
+    const product = await Post.findById(req.params.id);
 
     if (!product) {
       return res.status(404).json({ msg: 'Product does not exist' });
@@ -104,7 +106,6 @@ router.delete('/:id', auth, async (req, res) => {
     await product.remove();
 
     res.status(200).json({ msg: 'Product removed' });
-
   } catch (err) {
     console.error(err.message);
     return res.status(500).json({ msg: 'Server Error' });
