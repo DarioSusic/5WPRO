@@ -10,7 +10,7 @@ const User = require('../../models/User');
 //@route    GET api/product
 //@desc     Get all products
 //@access   public
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
   try {
     const products = await Product.find().limit(20);
     res.json(products);
@@ -66,8 +66,9 @@ router.post(
     try {
       const user = await User.findById(req.user.id).select('-password');
 
-      //TODO Check if user is admin
-      console.log(user);
+      if (!user.isAdmin || !user.isSuperAdmin) {
+        res.status(401).json({ msg: 'Unouthorised access' });
+      }
 
       //TODO add other fields from product schema
       const newProduct = new Product({
@@ -102,7 +103,10 @@ router.delete('/:id', auth, async (req, res) => {
       return res.status(404).json({ msg: 'Product does not exist' });
     }
 
-    //TODO check if user is admin
+    if (!user.isAdmin || !user.isSuperAdmin) {
+      res.status(401).json({ msg: 'Unouthorised access' });
+    }
+
     await product.remove();
 
     res.status(200).json({ msg: 'Product removed' });
