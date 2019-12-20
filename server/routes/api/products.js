@@ -38,60 +38,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-//@route    POST api/product
-//@desc     Create new product
-//@access   private / Restricted
-router.post(
-  '/',
-  [
-    auth,
-    [
-      check('title', 'Title of product is required')
-        .not()
-        .isEmpty(),
-      check('quantity', 'Quantity of product is required')
-        .not()
-        .isEmpty(),
-      check('price', 'Price of product is required')
-        .not()
-        .isEmpty()
-    ]
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    try {
-      const user = await User.findById(req.user.id).select('-password');
-
-      if (!user.isAdmin || !user.isSuperAdmin) {
-        res.status(401).json({ msg: 'Unauthorised access' });
-      }
-
-      //FIXME add other fields from product schema
-      const newProduct = new Product({
-        title: req.body.title,
-        description: req.body.description,
-        quantity: req.body.quantity,
-        pricing: { price: req.body.price },
-        sku: req.body.sku,
-        name: user.name,
-        avatar: user.avatar,
-        user: req.user.id
-      });
-
-      const product = await newProduct.save();
-
-      res.json(product);
-    } catch (err) {
-      console.error(err.message);
-      return res.status(500).json({ msg: 'Server Error' });
-    }
-  }
-);
-
 //@route    DELETE api/product/:id
 //@desc     Delete product by id
 //@access   private / Restricted
@@ -142,7 +88,7 @@ router.put('/:id', auth, async (req, res) => {
 //@desc     Create new product
 //@access   private / Restricted
 router.post(
-  '/1',
+  '/',
   [
     auth,
     [
@@ -158,6 +104,11 @@ router.post(
     ]
   ],
   async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user.isAdmin || !user.isSuperAdmin) {
+      res.status(401).json({ msg: 'Unauthorised access' });
+    }
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -178,46 +129,42 @@ router.post(
       depth
     } = req.body;
 
-    //TODO finish product fields
+    //Build product object
     const productFields = {};
-    productFields.user = req.user.id;
     if (title) productFields.title = title;
-    if (description) productFields.title = description;
-    if (quantity) productFields.title = quantity;
-    if (sku) productFields.title = sku;
+    if (description) productFields.description = description;
+    if (quantity) productFields.quantity = quantity;
+    if (sku) productFields.sku = sku;
 
     productFields.pricing = {};
-    if (price) productFields.pricing.price;
-    if (discount) productFields.pricing.discount;
+    if (price) productFields.pricing.price = price;
+    if (discount) productFields.pricing.discount = discount;
 
     productFields.manufacture_details = {};
-    if (bar_code) productFields.manufacture_details.bar_code;
-    if (release_date) productFields.manufacture_details.release_date;
+    if (bar_code) productFields.manufacture_details.bar_code = bar_code;
+    if (release_date)
+      productFields.manufacture_details.release_date = release_date;
 
     productFields.shipping_details = {};
-    if (bar_code) productFields.manufacture_details.bar_code;
+    if (weight) productFields.shipping_details.weight = weight;
+    if (width) productFields.shipping_details.width = width;
+    if (height) productFields.shipping_details.height = height;
+    if (depth) productFields.shipping_details.depth = depth;
 
     try {
-      const user = await User.findById(req.user.id).select('-password');
-
-      if (!user.isAdmin || !user.isSuperAdmin) {
-        res.status(401).json({ msg: 'Unauthorised access' });
+      let product = await Product.findById(req.body.id);
+      if (product) {
+        //update product
+        product = await Product.findOneAndUpdate(
+          { _id: req.body.id },
+          { $set: productFields },
+          { new: true, upsert: true }
+        );
+        return res.json(product);
       }
 
-      //FIXME add other fields from product schema
-      const newProduct = new Product({
-        title: req.body.title,
-        description: req.body.description,
-        quantity: req.body.quantity,
-        pricing: { price: req.body.price },
-        sku: req.body.sku,
-        name: user.name,
-        avatar: user.avatar,
-        user: req.user.id
-      });
-
-      const product = await newProduct.save();
-
+      product = new Product(productFields);
+      await product.save();
       res.json(product);
     } catch (err) {
       console.error(err.message);

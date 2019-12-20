@@ -9,7 +9,6 @@ const ProductSchema = new mongoose.Schema(
     title: {
       type: String,
       trim: true,
-      unique: true,
       required: [true, 'Please Enter your product name']
     },
     description: {
