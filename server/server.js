@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 4000;
 // Define Routes
 app.use('/', express.static('../client/build'));
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/login', require('./routes/api/login'));
 app.use('/api/products', require('./routes/api/products'));
 

@@ -11,17 +11,16 @@ const User = require('../../models/User');
 //@access   Private
 router.get('/me', auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id }).populate(
-      'user',
-      ['name', 'avatar']
-    );
+    const profile = await Profile.findOne({
+      user: req.user.id
+    }).populate('user', ['name', 'avatar']);
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
     }
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ msg: 'Server Error' });
   }
 });
 
@@ -32,7 +31,6 @@ router.post('/', auth, async (req, res) => {
   const {
     website,
     bio,
-    interests,
     youtube,
     twitter,
     facebook,
@@ -45,11 +43,6 @@ router.post('/', auth, async (req, res) => {
   profileFields.user = req.user.id;
   if (website) profileFields.website = website;
   if (bio) profileFields.bio = bio;
-  if (interests) {
-    profileFields.interests = interests
-      .split(',')
-      .map(interests => interests.trim());
-  }
 
   // Build social object
   profileFields.social = {};
@@ -83,20 +76,30 @@ router.post('/', auth, async (req, res) => {
 // @route    GET api/profile
 // @desc     Get all profiles
 // @access   Public
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
+  const user = await User.findById(req.user.id).select('-password');
+  if (!user.isAdmin || !user.isSuperAdmin) {
+    res.status(401).json({ msg: 'Unauthorised access' });
+  }
+
   try {
     const profiles = await Profile.find().populate('user', ['name', 'avatar']);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ msg: 'Server Error' });
   }
 });
 
 // @route    GET api/profile/user/:user_id
 // @desc     Get profile by user ID
 // @access   Public
-router.get('/user/:user_id', async (req, res) => {
+router.get('/user/:user_id', auth, async (req, res) => {
+  const user = await User.findById(req.user.id).select('-password');
+  if (!user.isAdmin || !user.isSuperAdmin) {
+    res.status(401).json({ msg: 'Unauthorised access' });
+  }
+
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id
@@ -111,7 +114,7 @@ router.get('/user/:user_id', async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(400).json({ msg: 'Profile not found' });
     }
-    res.status(500).send('Server Error');
+    res.status(500).json({ msg: 'Server Error' });
   }
 });
 
@@ -128,7 +131,30 @@ router.delete('/', auth, async (req, res) => {
     res.json({ msg: 'User removed' });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ msg: 'Server Error' });
   }
 });
+
+// @route    DELETE api/profile/:id
+// @desc     Delete profile and user for admin
+// @access   Private / Restricted
+router.delete('/:id', auth, async (req, res) => {
+  const user = await User.findById(req.user.id).select('-password');
+  if (!user.isAdmin || !user.isSuperAdmin) {
+    res.status(401).json({ msg: 'Unauthorised access' });
+  }
+
+  try {
+    //Remove profile
+    await Profile.findOneAndRemove({ user: req.params.id });
+
+    //Remove user
+    await User.findOneAndRemove({ _id: req.params.id });
+    res.status(200).json({ msg: 'User removed' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: 'Server Error' });
+  }
+});
+
 module.exports = router;

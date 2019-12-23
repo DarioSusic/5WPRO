@@ -12,9 +12,6 @@ const ProfileSchema = new mongoose.Schema(
     bio: {
       type: String
     },
-    interests: {
-      type: [String]
-    },
     social: {
       youtube: {
         type: String
