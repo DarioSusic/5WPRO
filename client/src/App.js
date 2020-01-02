@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
+import Navbar from './components/layout/AppNavbar';
+import Landing from './components/layout/Landing';
 import './App.css';
 
 const App = () => {
   return (
     <Fragment>
-      <h1>5WPRO.com</h1>
+      <Navbar />
+      <Landing />
     </Fragment>
   );
 };
