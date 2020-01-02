@@ -63,27 +63,6 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
-//@route    PUT api/product/:id
-//@desc     Update product by id
-//@access   private / Restricted
-router.put('/:id', auth, async (req, res) => {
-  try {
-    const product = await Post.findById(req.params.id);
-    const user = await User.findById(req.user.id).select('-password');
-
-    if (!user.isAdmin || !user.isSuperAdmin) {
-      res.status(401).json({ msg: 'Unauthorised access' });
-    }
-
-    if (!product) {
-      return res.status(404).json({ msg: 'Product does not exist' });
-    }
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).json({ msg: 'Server Error' });
-  }
-});
-
 //@route    POST api/product
 //@desc     Create new product
 //@access   private / Restricted
