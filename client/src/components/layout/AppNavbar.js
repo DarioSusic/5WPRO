@@ -5,7 +5,7 @@ import { NavLink, Link, withRouter } from 'react-router-dom';
 export const AppNavbar = () => {
   return (
     <Navbar bg='dark' variant='dark'>
-      <Navbar.Brand href='#home'>
+      <Navbar.Brand href='/home'>
         <img
           alt=''
           src='/logo.svg'
@@ -19,16 +19,16 @@ export const AppNavbar = () => {
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto'>
           <Nav.Item>
-            <Nav.Link to='#home'>Contact</Nav.Link>
+            <Nav.Link href='/contact'>Contact</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link to='#register'>Register</Nav.Link>
+            <Nav.Link href='/register'>Register</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link to='#login'>Login</Nav.Link>
+            <Nav.Link href='/login'>Login</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link to='#cart'>Shopping Cart</Nav.Link>
+            <Nav.Link href='/cart'>Shopping Cart</Nav.Link>
           </Nav.Item>
         </Nav>
       </Navbar.Collapse>
