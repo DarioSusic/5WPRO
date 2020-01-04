@@ -7,7 +7,7 @@ const Register = () => {
     <Fragment>
       <h1 className='large text-primary'>Sign Up</h1>
       <p className='lead'>
-        <FontAwesomeIcon icon='spinner' fixedWidth />
+        <FontAwesomeIcon icon='question' fixedWidth />
         <i className='fas fa-user'></i> Create Your Account
       </p>
       <Form>
