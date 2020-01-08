@@ -1,6 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { NavLink, Link, withRouter } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
 
 export const AppNavbar = () => {
   return (

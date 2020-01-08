@@ -19,18 +19,21 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const { name, email, password, password2 } = formData;
 
   const onChange = e => {
-    console.log(e.target);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('Password do not match');
+      setAlert('Passwords do not match', 'danger');
     } else {
-      console.log(formData);
+      register({ name, email, password });
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <Fragment>
@@ -83,10 +86,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           />
         </Form.Group>
 
-        <Button variant='primary' type='submit'>
+        <Button variant='primary' value='Register' type='submit'>
           Submit
         </Button>
       </Form>
+      <p>
+        Already have an account? <Link to='/login'>Sign In</Link>
+      </p>
     </Fragment>
   );
 };
