@@ -39,7 +39,7 @@ router.post(
     try {
       //see if user exists
       let user = await User.findOne({ email });
-
+      //TODO add response standardisation to all responeses
       if (user) {
         return res
           .status(400)

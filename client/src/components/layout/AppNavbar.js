@@ -7,7 +7,7 @@ export const AppNavbar = () => {
       <Navbar.Brand href='/'>
         <img
           alt=''
-          src='/logo.svg'
+          src='#'
           width='30'
           height='30'
           className='d-inline-block align-top'

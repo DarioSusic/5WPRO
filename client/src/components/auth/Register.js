@@ -49,6 +49,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name='name'
             onChange={e => onChange(e)}
             type='text'
+            required
             placeholder='Enter your name and surname'
           />
         </Form.Group>
@@ -61,6 +62,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             onChange={e => onChange(e)}
             type='email'
             placeholder='Enter email'
+            required
           />
         </Form.Group>
 
@@ -71,6 +73,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name='password'
             onChange={e => onChange(e)}
             type='password'
+            required
             placeholder='Password'
           />
         </Form.Group>
@@ -82,6 +85,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name='password2'
             onChange={e => onChange(e)}
             type='password'
+            required
             placeholder='Confirm Password'
           />
         </Form.Group>
