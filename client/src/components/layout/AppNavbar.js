@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
 import { Navbar, Nav } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLink = (
@@ -34,9 +36,6 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       <Nav.Item>
         <Nav.Link href='/login'>Login</Nav.Link>
       </Nav.Item>
-      <Nav.Item>
-        <Nav.Link href='/cart'>Shopping Cart</Nav.Link>
-      </Nav.Item>
     </Nav>
   );
 
@@ -57,6 +56,13 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         {!loading && (
           <Fragment>{isAuthenticated ? authLink : guestLinks}</Fragment>
         )}
+        <Nav>
+          <Nav.Item>
+            <Nav.Link href='/cart'>
+              <FontAwesomeIcon className='fa-lg' icon={faShoppingCart} />
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
