@@ -22,6 +22,11 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           Logout
         </Nav.Link>
       </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href='/cart'>
+          <FontAwesomeIcon className='fa-lg' icon={faShoppingCart} />
+        </Nav.Link>
+      </Nav.Item>
     </Nav>
   );
 
@@ -35,6 +40,11 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </Nav.Item>
       <Nav.Item>
         <Nav.Link href='/login'>Login</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href='/cart'>
+          <FontAwesomeIcon className='fa-lg' icon={faShoppingCart} />
+        </Nav.Link>
       </Nav.Item>
     </Nav>
   );
@@ -56,13 +66,6 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         {!loading && (
           <Fragment>{isAuthenticated ? authLink : guestLinks}</Fragment>
         )}
-        <Nav>
-          <Nav.Item>
-            <Nav.Link href='/cart'>
-              <FontAwesomeIcon className='fa-lg' icon={faShoppingCart} />
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
