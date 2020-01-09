@@ -12,26 +12,21 @@ import {
 } from './types';
 
 import setAuthToken from '../utils/setAuthToken';
-//Load user
 
+//Load user
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
-    console.log('test');
   }
-  console.log('Ovde 1');
 
   try {
-    console.log('prije res');
     const res = await axios.get('/api/login');
-    console.log(res);
 
     dispatch({
       type: USER_LOADED,
       payload: res.data
     });
   } catch (err) {
-    console.log('ovde pada');
     dispatch({
       type: AUTH_ERROR
     });
@@ -77,7 +72,6 @@ export const login = (email, password) => async dispatch => {
   };
 
   const body = JSON.stringify({ email, password });
-  console.log(body);
 
   try {
     const res = await axios.post('/api/login', body, config);
