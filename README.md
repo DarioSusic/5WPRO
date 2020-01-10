@@ -55,4 +55,4 @@ Sales – Payments – Administration
 
 USE EVENT SOURCING for transactions
 
-https://www.functionals.eu/downloads
+https://www.functionals.eu/
