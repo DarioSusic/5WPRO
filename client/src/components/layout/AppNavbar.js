@@ -12,6 +12,9 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLink = (
     <Nav className='ml-auto'>
       <Nav.Item>
+        <Nav.Link href='/products'>Products</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
         <Nav.Link href='/profiles'>Profile</Nav.Link>
       </Nav.Item>
       <Nav.Item>

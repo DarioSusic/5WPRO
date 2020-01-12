@@ -7,6 +7,7 @@ import Dashboard from '../dashboard/Dashboard';
 import Contact from '../contact/Contact';
 import Profile from '../profile/Profile';
 import Cart from '../cart/Cart';
+import Products from '../products/Products';
 import NotFound from '../layout/ErrorPage';
 
 import PrivateRoute from './PrivateRoute';
@@ -20,6 +21,7 @@ const Routes = () => {
         <Route exact path='/login' component={Login} />
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/cart' component={Cart} />
+        <Route exact path='/products' component={Products} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/profiles' component={Profile} />
         <Route component={NotFound} />
