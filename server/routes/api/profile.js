@@ -29,6 +29,7 @@ router.get('/me', auth, async (req, res) => {
 // @access   Private
 router.post('/', auth, async (req, res) => {
   const {
+    company,
     website,
     bio,
     youtube,
@@ -41,6 +42,7 @@ router.post('/', auth, async (req, res) => {
   // Build profile object
   const profileFields = {};
   profileFields.user = req.user.id;
+  if (company) profileFields.company = company;
   if (website) profileFields.website = website;
   if (bio) profileFields.bio = bio;
 

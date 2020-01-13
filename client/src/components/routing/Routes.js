@@ -8,6 +8,8 @@ import Contact from '../contact/Contact';
 import Profile from '../profile/Profile';
 import Cart from '../cart/Cart';
 import Products from '../products/Products';
+import CreateProfile from '../profile/profile-forms/CreateProfile';
+import EditProfile from '../profile/profile-forms/EditProfile';
 import NotFound from '../layout/ErrorPage';
 
 import PrivateRoute from './PrivateRoute';
@@ -24,6 +26,8 @@ const Routes = () => {
         <Route exact path='/products' component={Products} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/profiles' component={Profile} />
+        <PrivateRoute exact path='/create-profile' component={CreateProfile} />
+        <PrivateRoute exact path='/edit-profile' component={EditProfile} />
         <Route component={NotFound} />
       </Switch>
     </section>
