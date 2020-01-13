@@ -78,7 +78,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           />
         </Form.Group>
 
-        <Form.Group controlId='formGridPassword'>
+        <Form.Group controlId='formGridPassword2'>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             value={password2}
