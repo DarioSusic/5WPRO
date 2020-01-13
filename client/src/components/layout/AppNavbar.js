@@ -10,12 +10,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLink = (
-    <Nav className='ml-auto'>
-      <Nav.Item>
-        <Nav.Link to='/products' exact as={NavLink}>
-          Products
-        </Nav.Link>
-      </Nav.Item>
+    <Nav>
       <Nav.Item>
         <Nav.Link to='/profiles' exact as={NavLink}>
           Profile
@@ -27,25 +22,15 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={logout} to='#!' exact as={NavLink}>
+        <Nav.Link onClick={logout} href='#'>
           Logout
-        </Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link to='/cart' exact as={NavLink}>
-          <FontAwesomeIcon className='fa-lg' icon={faShoppingCart} />
         </Nav.Link>
       </Nav.Item>
     </Nav>
   );
 
   const guestLinks = (
-    <Nav className='ml-auto'>
-      <Nav.Item>
-        <Nav.Link to='/contact' exact as={NavLink}>
-          Contact
-        </Nav.Link>
-      </Nav.Item>
+    <Nav>
       <Nav.Item>
         <Nav.Link to='/register' exact as={NavLink}>
           Register
@@ -56,16 +41,11 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           Login
         </Nav.Link>
       </Nav.Item>
-      <Nav.Item>
-        <Nav.Link to='/cart' exact as={NavLink}>
-          <FontAwesomeIcon className='fa-lg' icon={faShoppingCart} />
-        </Nav.Link>
-      </Nav.Item>
     </Nav>
   );
 
   return (
-    <Navbar bg='dark' variant='dark'>
+    <Navbar bg='dark' variant='dark' expand='lg'>
       <Navbar.Brand to='/' exact as={NavLink}>
         <img
           alt=''
@@ -78,9 +58,28 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
-        {!loading && (
-          <Fragment>{isAuthenticated ? authLink : guestLinks}</Fragment>
-        )}
+        <Nav className='ml-auto'>
+          <Nav.Item>
+            <Nav.Link to='/contact' exact as={NavLink}>
+              Contact
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link to='/products' exact as={NavLink}>
+              Products
+            </Nav.Link>
+          </Nav.Item>
+
+          {!loading && (
+            <Fragment>{isAuthenticated ? authLink : guestLinks}</Fragment>
+          )}
+
+          <Nav.Item>
+            <Nav.Link to='/cart' exact as={NavLink}>
+              <FontAwesomeIcon className='fa-lg' icon={faShoppingCart} />
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
