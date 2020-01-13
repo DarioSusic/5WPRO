@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Carousel from 'react-bootstrap/Carousel';
-import Card from 'react-bootstrap/Card';
+//import Card from 'react-bootstrap/Card';
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {

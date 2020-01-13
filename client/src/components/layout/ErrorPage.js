@@ -1,21 +1,28 @@
-import React from 'react';
-
+import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import { Nav } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 //TODO edit 404
 const ErrorPage = () => {
   return (
-    <div id='notfound'>
-      <div className='notfound'>
-        <div className='notfound-404'>
-          <h1>Oops!</h1>
+    <Fragment>
+      <Container>
+        <Row>
+          <h1 className='large text-primary'>Oops!</h1>
+        </Row>
+        <Row>
           <h2>404 - The Page cannot be found</h2>
-        </div>
-        <a>
-          <NavLink to='/'>Go TO Homepage</NavLink>
-        </a>
-      </div>
-    </div>
+        </Row>
+        <Row>
+          <Nav.Link to='/' exact as={NavLink}>
+            Go to Homepage
+          </Nav.Link>
+        </Row>
+      </Container>
+    </Fragment>
   );
 };
 
