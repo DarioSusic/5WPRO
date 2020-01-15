@@ -1,11 +1,11 @@
 import axios from 'axios';
-//import { setAlert } from './alert';
+import { setAlert } from './alert';
 
 import {
   GET_PRODUCT,
   GET_PRODUCTS,
   PRODUCT_ERROR,
-  CLEAR_PRODUCT
+  DELETE_PRODUCT
 } from './types';
 
 //Get product by ID
@@ -20,7 +20,7 @@ export const getProductById = productId => async dispatch => {
   } catch (err) {
     dispatch({
       type: PRODUCT_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response, status: err.response }
     });
   }
 };
@@ -39,5 +39,23 @@ export const getProducts = () => async dispatch => {
       type: PRODUCT_ERROR,
       payload: { msg: err.response, status: err.response }
     });
+  }
+};
+
+// Delete product by id
+export const deleteProduct = id => async dispatch => {
+  if (window.confirm('Are you sure? This can NOT be undone!')) {
+    try {
+      await axios.delete(`/api/products/${id}`);
+
+      dispatch({ type: DELETE_PRODUCT });
+
+      dispatch(setAlert('Product Removed', 'success'));
+    } catch (err) {
+      dispatch({
+        type: PRODUCT_ERROR,
+        payload: { msg: err.response, status: err.response }
+      });
+    }
   }
 };

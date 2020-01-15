@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
 //@access   private / Restricted
 router.delete('/:id', auth, async (req, res) => {
   try {
-    const product = await Post.findById(req.params.id);
+    const product = await Product.findById(req.params.id);
     const user = await User.findById(req.user.id).select('-password');
 
     if (!user.isAdmin || !user.isSuperAdmin) {
