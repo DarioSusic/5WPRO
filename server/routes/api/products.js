@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-//@route    GET api/product/id
+//@route    GET api/products/id
 //@desc     Get product by id
 //@access   public
 router.get('/:id', async (req, res) => {

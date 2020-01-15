@@ -9,9 +9,9 @@ import {
 } from './types';
 
 //Get product by ID
-export const getProductById = productId => async dispatch => {
+export const getProductById = id => async dispatch => {
   try {
-    const res = await axios.get(`api/product/${productId}`);
+    const res = await axios.get(`api/products/${id}`);
 
     dispatch({
       type: GET_PRODUCT,

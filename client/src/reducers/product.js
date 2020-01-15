@@ -2,11 +2,11 @@ import {
   GET_PRODUCT,
   GET_PRODUCTS,
   PRODUCT_ERROR,
-  CLEAR_PRODUCT
+  DELETE_PRODUCT
 } from '../actions/types';
 
 const initialState = {
-  product: 4,
+  product: null,
   products: [],
   loading: true,
   error: {}
@@ -34,7 +34,7 @@ export default function(state = initialState, action) {
         error: payload,
         loading: false
       };
-    case CLEAR_PRODUCT:
+    case DELETE_PRODUCT:
       return {
         ...state,
         product: null,

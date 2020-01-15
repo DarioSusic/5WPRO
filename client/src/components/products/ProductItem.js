@@ -32,7 +32,7 @@ const ProductItem = ({
         </ListGroup>
         <Card.Body>
           <Button
-            to={`/products/${_id}`}
+            to={`/product/${_id}`}
             exact
             as={NavLink}
             variant='primary'
@@ -44,7 +44,7 @@ const ProductItem = ({
           {/*TODO Figure what happens with state on reload and how to put super admin*/}
           {!auth.loading && auth.user.isAdmin && (
             <Button
-              to={`/products/${_id}`}
+              to={`/product/${_id}`}
               as={NavLink}
               variant='outline-success'
               type='button'

@@ -7,6 +7,7 @@ import Dashboard from '../dashboard/Dashboard';
 import Contact from '../contact/Contact';
 import Profile from '../profile/Profile';
 import Cart from '../cart/Cart';
+import Product from '../products/Product';
 import Products from '../products/Products';
 import CreateProfile from '../profile/profile-forms/CreateProfile';
 import EditProfile from '../profile/profile-forms/EditProfile';
@@ -23,6 +24,7 @@ const Routes = () => {
         <Route exact path='/login' component={Login} />
         <Route exact path='/contact' component={Contact} />
         <Route exact path='/cart' component={Cart} />
+        <Route exact path='/product/:id' component={Product} />
         <Route exact path='/products' component={Products} />
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/profiles' component={Profile} />
