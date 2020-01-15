@@ -12,6 +12,11 @@ export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const GET_PROFILES = 'GET_PROFILES';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 
+export const GET_PRODUCT = 'GET_PRODUCT';
+export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const PRODUCT_ERROR = 'PRODUCT_ERROR';
+export const CLEAR_PRODUCT = 'CLEAR_PRODUCT';
+
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';

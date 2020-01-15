@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile } from '../../../actions/profile';
 
-import { Form, Button, Row, Container } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 
 const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({

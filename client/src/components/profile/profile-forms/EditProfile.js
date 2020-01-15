@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentProfile } from '../../../actions/profile';
 
-import { Form, Button, Row, Container } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 
 const EditProfile = ({
   profile: { profile, loading },
