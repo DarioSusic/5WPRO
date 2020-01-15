@@ -5,6 +5,8 @@ import ProductItem from './ProductItem';
 import { connect } from 'react-redux';
 import { getProducts } from '../../actions/product';
 
+import { CardColumns, Form, FormControl, Button, Row } from 'react-bootstrap';
+
 const Products = ({ getProducts, product: { products, loading } }) => {
   useEffect(() => {
     getProducts();
@@ -15,11 +17,18 @@ const Products = ({ getProducts, product: { products, loading } }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <h1 className='large text-primary'>Users</h1>
-          <p className='lead'>
-            <i className='fas fa-users'></i> Browse users
-          </p>
-          <div className='profiles'>
+          <Row>
+            <h1 className='large text-primary'>Products</h1>
+            <Form className='ml-auto' inline>
+              <FormControl
+                type='text'
+                placeholder='Search'
+                className='mr-sm-2'
+              />
+              <Button variant='outline-success'>Search</Button>
+            </Form>
+          </Row>
+          <CardColumns>
             {products.length > 0 ? (
               products.map(product => (
                 <ProductItem key={product._id} product={product} />
@@ -27,7 +36,7 @@ const Products = ({ getProducts, product: { products, loading } }) => {
             ) : (
               <h4>No products found...</h4>
             )}
-          </div>
+          </CardColumns>
         </Fragment>
       )}
     </Fragment>
