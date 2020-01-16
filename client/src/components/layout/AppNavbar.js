@@ -8,7 +8,19 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+export const AppNavbar = ({
+  auth: { isAuthenticated, loading, user },
+  logout
+}) => {
+  const adminLink = (
+    <Nav>
+      <Nav.Item>
+        <Nav.Link to='/profiles' exact as={NavLink}>
+          Profile
+        </Nav.Link>
+      </Nav.Item>
+    </Nav>
+  );
   const authLink = (
     <Nav>
       <Nav.Item>
@@ -73,6 +85,12 @@ export const AppNavbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           {!loading && (
             <Fragment>{isAuthenticated ? authLink : guestLinks}</Fragment>
           )}
+
+          {/* {!loading && (
+            <Fragment>
+              {!user.isAdmin || !user.isSuperAdmin ? adminLink : guestLinks}
+            </Fragment>
+          )} */}
 
           <Nav.Item>
             <Nav.Link to='/cart' exact as={NavLink}>
