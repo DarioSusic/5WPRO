@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "concurrently": "^5.0.0"
+    "concurrently": "^5.3.0"
   },
   "scripts": {
     "frontend": "cd client && npm start",
